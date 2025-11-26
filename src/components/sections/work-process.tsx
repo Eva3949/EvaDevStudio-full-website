@@ -1,5 +1,7 @@
 import SectionHeader from './section-header';
 import { Lightbulb, LayoutTemplate, Code, FlaskConical, Rocket } from 'lucide-react';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const processSteps = [
   {
@@ -30,17 +32,29 @@ const processSteps = [
 ];
 
 export default function WorkProcess() {
+  const bgImage = PlaceHolderImages.find(p => p.id === 'work-process-bg');
+
   return (
-    <section id="process" className="py-24 sm:py-32 bg-secondary">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="process" className="relative py-24 sm:py-32">
+      {bgImage && (
+        <Image
+          src={bgImage.imageUrl}
+          alt={bgImage.description}
+          fill
+          className="object-cover"
+          data-ai-hint={bgImage.imageHint}
+        />
+      )}
+      <div className="absolute inset-0 bg-black/70"></div>
+      <div className="container relative mx-auto px-4 md:px-6">
         <SectionHeader
           title="Our Work Process"
           subtitle="A streamlined and transparent workflow designed for efficiency and quality."
         />
         <div className="relative mt-16 max-w-3xl mx-auto">
-          <div className="absolute left-8 top-0 bottom-0 w-px bg-border hidden sm:block"></div>
+          <div className="absolute left-8 top-0 bottom-0 w-px bg-border/30 hidden sm:block"></div>
           <div className="space-y-12">
-            {processSteps.map((step) => (
+            {processSteps.map((step, index) => (
               <div
                 key={step.name}
                 className="relative flex items-start gap-6"
@@ -51,8 +65,8 @@ export default function WorkProcess() {
                 <div className="flex-shrink-0 bg-primary/10 p-3 rounded-lg w-fit h-fit mt-1 sm:ml-14">
                     <step.icon className="h-6 w-6 text-primary" />
                 </div>
-                <div className="bg-card/50 p-4 rounded-lg">
-                    <h3 className="text-xl font-semibold">{step.name}</h3>
+                <div className="bg-card/80 backdrop-blur-sm p-4 rounded-lg">
+                    <h3 className="text-xl font-semibold text-card-foreground">{step.name}</h3>
                     <p className="mt-2 text-muted-foreground">{step.description}</p>
                 </div>
               </div>
