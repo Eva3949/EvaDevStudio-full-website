@@ -22,7 +22,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 sm:py-32 bg-secondary">
+    <section id="services" className="py-24 sm:py-32 bg-gradient-to-b from-background to-secondary">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Our Services"
