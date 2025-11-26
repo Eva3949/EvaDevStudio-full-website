@@ -3,10 +3,25 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Hero() {
+  const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
+
   return (
-    <section id="home" className="relative w-full h-screen min-h-[700px] flex items-center justify-center bg-background">
+    <section id="home" className="relative w-full h-screen min-h-[700px] flex items-center justify-center">
+      {heroImage && (
+        <Image
+          src={heroImage.imageUrl}
+          alt={heroImage.description}
+          fill
+          className="object-cover"
+          priority
+          data-ai-hint={heroImage.imageHint}
+        />
+      )}
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
       <div className="container relative mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-1 gap-8 items-center">
             <div className="max-w-3xl text-left">
