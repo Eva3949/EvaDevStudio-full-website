@@ -57,7 +57,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 sm:py-32 bg-secondary">
+    <section id="projects" className="py-24 sm:py-32">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Our Projects"
@@ -67,7 +67,7 @@ export default function Projects() {
           {projects.map((project) => {
             const projectImage = PlaceHolderImages.find(p => p.id === project.id);
             return (
-              <Card key={project.title} className="flex flex-col overflow-hidden group">
+              <Card key={project.title} className="flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 {projectImage && (
                   <div className="relative h-48 w-full overflow-hidden">
                     <Image
