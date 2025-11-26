@@ -92,7 +92,7 @@ export default function Projects() {
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => <Badge key={tag} variant="outline">{tag}</Badge>)}
                   </div>
-                  <Button asChild variant="ghost" size="sm" className="mt-4 sm:mt-0">
+                  <Button asChild size="sm" className="mt-4 sm:mt-0">
                     <Link href={project.link}>
                       View Site
                       <ArrowUpRight className="ml-2 h-4 w-4" />
