@@ -1,8 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import SectionHeader from './section-header';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { ArrowUpRight } from 'lucide-react';
 
 const projects = [
   {
@@ -12,6 +15,7 @@ const projects = [
     features: 'Real-time scoring, question bank, progress tracking.',
     impact: 'Improved student preparedness and exam scores.',
     tags: ['Mobile App', 'Flutter', 'Firebase'],
+    link: '#',
   },
   {
     id: 'project-store',
@@ -20,6 +24,7 @@ const projects = [
     features: 'Inventory tracking, sales analytics, CRM.',
     impact: 'Streamlined store operations and increased profitability.',
     tags: ['Web App', 'Next.js', 'Firestore'],
+    link: '#',
   },
   {
     id: 'project-portfolio',
@@ -28,6 +33,7 @@ const projects = [
     features: 'Dynamic galleries, contact forms, SEO optimization.',
     impact: 'Enhanced online presence and client acquisition.',
     tags: ['Web Design', 'Next.js', 'Figma'],
+    link: '#',
   },
   {
     id: 'project-graphics',
@@ -36,6 +42,7 @@ const projects = [
     features: 'Brand identity, digital illustration, print design.',
     impact: 'Elevated brand perception and marketing effectiveness.',
     tags: ['Branding', 'Adobe Suite', 'Figma'],
+    link: '#',
   },
   {
     id: 'project-utility',
@@ -44,12 +51,13 @@ const projects = [
     features: 'Task managers, note-taking, system cleaners.',
     impact: 'Increased user productivity on mobile devices.',
     tags: ['Mobile App', 'Dart', 'Utility'],
+    link: '#',
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 sm:py-32 bg-secondary">
+    <section id="projects" className="py-24 sm:py-32">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Our Projects"
@@ -80,10 +88,16 @@ export default function Projects() {
                   <p className="mt-2 text-sm text-muted-foreground"><span className="font-semibold text-foreground">Features:</span> {project.features}</p>
                   <p className="mt-2 text-sm text-muted-foreground"><span className="font-semibold text-foreground">Impact:</span> {project.impact}</p>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="flex-wrap justify-between items-center">
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => <Badge key={tag} variant="outline">{tag}</Badge>)}
                   </div>
+                  <Button asChild variant="ghost" size="sm" className="mt-4 sm:mt-0">
+                    <Link href={project.link}>
+                      View Site
+                      <ArrowUpRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </CardFooter>
               </Card>
             );
