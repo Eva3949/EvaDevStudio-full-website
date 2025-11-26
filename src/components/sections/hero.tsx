@@ -8,6 +8,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Hero() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
+  const robotImage = PlaceHolderImages.find(p => p.id === 'robot-gif');
 
   return (
     <section id="home" className="relative w-full h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
@@ -23,7 +24,7 @@ export default function Hero() {
       )}
       <div className="absolute inset-0 bg-black/60"></div>
       <div className="container relative mx-auto px-4 md:px-6">
-        <div className="grid md:grid-cols-1 gap-8 items-center">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="max-w-3xl text-left">
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-headline text-white">
                 Crafting Digital Excellence.
@@ -41,6 +42,20 @@ export default function Hero() {
                   <Link href="#contact">Contact Us</Link>
                 </Button>
               </div>
+            </div>
+            <div className="hidden md:flex justify-center items-center">
+              {robotImage && (
+                <div className="relative w-80 h-80 lg:w-96 lg:h-96">
+                  <Image
+                    src={robotImage.imageUrl}
+                    alt={robotImage.description}
+                    fill
+                    className="object-contain"
+                    unoptimized // Important for GIFs
+                    data-ai-hint={robotImage.imageHint}
+                  />
+                </div>
+              )}
             </div>
         </div>
       </div>
