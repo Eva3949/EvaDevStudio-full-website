@@ -57,7 +57,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 sm:py-32">
+    <section id="projects" className="py-24 sm:py-32 bg-secondary">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Our Projects"
@@ -92,7 +92,7 @@ export default function Projects() {
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => <Badge key={tag} variant="outline">{tag}</Badge>)}
                   </div>
-                  <Button asChild size="sm" className="mt-4 sm:mt-0">
+                  <Button asChild size="sm" className="mt-4">
                     <Link href={project.link}>
                       View Site
                       <ArrowUpRight className="ml-2 h-4 w-4" />
