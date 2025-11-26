@@ -41,6 +41,12 @@
       "description": "Mobile Utility Tools project screenshot",
       "imageUrl": "https://images.unsplash.com/photo-1740591526503-54ae91793a1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx1dGlsaXR5JTIwYXBwfGVufDB8fHx8MTc2NDEzNzI4MHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "utility app"
+    },
+    {
+      "id": "work-process-bg",
+      "description": "Software development process background",
+      "imageUrl": "https://images.unsplash.com/photo-1517694712202-1428bc3cd405?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50fGVufDB8fHx8MTc2NDEzNzI4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "software development"
     }
   ]
 }

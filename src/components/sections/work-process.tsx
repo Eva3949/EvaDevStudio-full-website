@@ -1,5 +1,7 @@
 import SectionHeader from './section-header';
 import { Lightbulb, LayoutTemplate, Code, FlaskConical, Rocket } from 'lucide-react';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const processSteps = [
   {
@@ -30,9 +32,21 @@ const processSteps = [
 ];
 
 export default function WorkProcess() {
+  const bgImage = PlaceHolderImages.find(p => p.id === 'work-process-bg');
+
   return (
-    <section id="process" className="py-24 sm:py-32 bg-secondary">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="process" className="relative py-24 sm:py-32">
+      {bgImage && (
+        <Image
+          src={bgImage.imageUrl}
+          alt={bgImage.description}
+          fill
+          className="object-cover"
+          data-ai-hint={bgImage.imageHint}
+        />
+      )}
+      <div className="absolute inset-0 bg-background/80" />
+      <div className="relative container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Our Work Process"
           subtitle="A streamlined and transparent workflow designed for efficiency and quality."
@@ -45,13 +59,13 @@ export default function WorkProcess() {
                 key={step.name}
                 className="relative flex items-start gap-6"
               >
-                <div className="hidden sm:flex absolute top-1 -left-px -translate-x-1/2 bg-secondary p-1 rounded-full border">
+                <div className="hidden sm:flex absolute top-1 -left-px -translate-x-1/2 bg-background p-1 rounded-full border">
                   <div className="h-3 w-3 bg-primary rounded-full"></div>
                 </div>
-                <div className="flex-shrink-0 bg-primary/10 p-3 rounded-lg w-fit h-fit mt-1 sm:ml-14">
+                <div className="flex-shrink-0 bg-primary/10 p-3 rounded-lg w-fit h-fit mt-1 sm:ml-14 backdrop-blur-sm">
                     <step.icon className="h-6 w-6 text-primary" />
                 </div>
-                <div>
+                <div className="bg-background/50 backdrop-blur-sm p-4 rounded-lg">
                     <h3 className="text-xl font-semibold">{step.name}</h3>
                     <p className="mt-2 text-muted-foreground">{step.description}</p>
                 </div>
