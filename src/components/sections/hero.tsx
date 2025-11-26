@@ -1,23 +1,45 @@
+
+'use client';
+
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import React from 'react';
 
 export default function Hero() {
-  const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
+  const heroImages = PlaceHolderImages.filter(p => p.id.startsWith('hero'));
 
   return (
     <section id="home" className="relative w-full pt-20">
-      {heroImage && (
-        <Image
-          src={heroImage.imageUrl}
-          alt={heroImage.description}
-          fill
-          className="object-cover"
-          priority
-          data-ai-hint={heroImage.imageHint}
-        />
-      )}
+       <Carousel
+        plugins={[
+          Autoplay({
+            delay: 5000,
+          }),
+        ]}
+        className="absolute inset-0 w-full h-full"
+        opts={{
+          loop: true,
+        }}
+      >
+        <CarouselContent className="h-full">
+          {heroImages.map((image, index) => (
+            <CarouselItem key={index} className="h-full">
+              <Image
+                src={image.imageUrl}
+                alt={image.description}
+                fill
+                className="object-cover"
+                priority={index === 0}
+                data-ai-hint={image.imageHint}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
       <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
       <div className="container relative mx-auto px-4 md:px-6">

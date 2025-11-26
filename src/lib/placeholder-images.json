@@ -7,6 +7,18 @@
       "imageHint": "abstract technology"
     },
     {
+      "id": "hero-2",
+      "description": "Modern office with computers",
+      "imageUrl": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50JTIwdGVhbXxlbnwwfHx8fDE3NjQxMzkzNTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "software development team"
+    },
+    {
+      "id": "hero-3",
+      "description": "Close-up of code on a screen",
+      "imageUrl": "https://images.unsplash.com/photo-1517694712202-1428bc3cd405?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50fGVufDB8fHx8MTc2NDEzNzI4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "software development"
+    },
+    {
       "id": "founder",
       "description": "Portrait of Samuel Tenkir, founder of EvaDevStudio",
       "imageUrl": "https://images.unsplash.com/photo-1752317591494-7b8923e2daaf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtYWxlJTIwZm91bmRlciUyMHBvcnRyYWl0fGVufDB8fHx8MTc2NDEzNzI4MXww&ixlib=rb-4.1.0&q=80&w=1080",
