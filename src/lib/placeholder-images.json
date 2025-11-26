@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "Abstract technology background",
+      "imageUrl": "https://images.unsplash.com/photo-1579548122080-c35fd6820ecb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhYnN0cmFjdCUyMHRlY2hub2xvZ3l8ZW58MHx8fHwxNzY0MTA1NTM2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract technology"
+    },
+    {
+      "id": "founder",
+      "description": "Portrait of Samuel Tenkir, founder of EvaDevStudio",
+      "imageUrl": "https://images.unsplash.com/photo-1752317591494-7b8923e2daaf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtYWxlJTIwZm91bmRlciUyMHBvcnRyYWl0fGVufDB8fHx8MTc2NDEzNzI4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "male founder portrait"
+    },
+    {
+      "id": "project-astu",
+      "description": "ASTU Exam App project screenshot",
+      "imageUrl": "https://images.unsplash.com/photo-1632505084035-6430e808becc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtb2JpbGUlMjBhcHAlMjBzY3JlZW5zaG90fGVufDB8fHx8MTc2NDEzNzI4MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mobile app screenshot"
+    },
+    {
+      "id": "project-store",
+      "description": "Store Management System project screenshot",
+      "imageUrl": "https://images.unsplash.com/photo-1634804658555-248d9e9a212f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkYXNoYm9hcmQlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzY0MDg0NzM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dashboard interface"
+    },
+    {
+      "id": "project-portfolio",
+      "description": "Portfolio website project screenshot",
+      "imageUrl": "https://images.unsplash.com/photo-1642132652860-471b4228023e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwb3J0Zm9saW8lMjB3ZWJzaXRlfGVufDB8fHx8MTc2NDExNDY1NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "portfolio website"
+    },
+    {
+      "id": "project-graphics",
+      "description": "Graphic design project collage",
+      "imageUrl": "https://images.unsplash.com/photo-1516131206008-dd041a9764fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z3JhcGhpYyUyMGRlc2lnbnxlbnwwfHx8fDE3NjQwNDU5MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "graphic design"
+    },
+    {
+      "id": "project-utility",
+      "description": "Mobile Utility Tools project screenshot",
+      "imageUrl": "https://images.unsplash.com/photo-1740591526503-54ae91793a1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx1dGlsaXR5JTIwYXBwfGVufDB8fHx8MTc2NDEzNzI4MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "utility app"
+    }
+  ]
 }
