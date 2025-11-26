@@ -57,7 +57,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 sm:py-32 bg-secondary">
+    <section id="projects" className="py-24 sm:py-32 bg-gradient-to-b from-secondary to-background">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Our Projects"
