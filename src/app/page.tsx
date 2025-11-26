@@ -6,18 +6,33 @@ import Technologies from '@/components/sections/technologies';
 import WorkProcess from '@/components/sections/work-process';
 import Founder from '@/components/sections/founder';
 import Contact from '@/components/sections/contact';
+import AnimatedSection from '@/components/animated-section';
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <MissionVision />
-      <Services />
-      <Projects />
-      <Technologies />
-      <WorkProcess />
-      <Founder />
-      <Contact />
+      <AnimatedSection>
+        <MissionVision />
+      </AnimatedSection>
+      <AnimatedSection>
+        <Services />
+      </AnimatedSection>
+      <AnimatedSection>
+        <Projects />
+      </AnimatedSection>
+      <AnimatedSection>
+        <Technologies />
+      </AnimatedSection>
+      <AnimatedSection>
+        <WorkProcess />
+      </AnimatedSection>
+      <AnimatedSection>
+        <Founder />
+      </AnimatedSection>
+      <AnimatedSection>
+        <Contact />
+      </AnimatedSection>
     </>
   );
 }
