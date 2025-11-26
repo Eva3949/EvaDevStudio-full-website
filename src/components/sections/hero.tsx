@@ -21,16 +21,16 @@ export default function Hero() {
           data-ai-hint={heroImage.imageHint}
         />
       )}
-      <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-black/60"></div>
       <div className="container relative mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-1 gap-8 items-center">
             <div className="max-w-3xl text-left">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-headline text-foreground">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-headline text-white">
                 Crafting Digital Excellence.
                 <br />
                 <span className="text-primary">Built on Innovation.</span>
               </h1>
-              <p className="mt-6 text-lg leading-8 text-muted-foreground md:text-xl">
+              <p className="mt-6 text-lg leading-8 text-neutral-300 md:text-xl">
                 Welcome to EvaDevStudio, where cutting-edge technology meets creative design. We specialize in mobile app development, web development, and stunning graphics design. Our portfolio, running on Firebase Studio AI + Next.js, is a testament to our commitment to speed, performance, and modern aesthetics.
               </p>
               <div className="mt-10 flex items-center gap-x-6">
