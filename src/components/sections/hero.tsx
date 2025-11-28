@@ -23,7 +23,7 @@ export default function Hero() {
       )}
       <div className="absolute inset-0 bg-black/60"></div>
       <div className="container relative mx-auto px-4 md:px-6">
-        <div className="flex justify-center text-center">
+        <div className="flex justify-start text-left">
             <div className="max-w-3xl">
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl font-headline text-white">
                 Crafting Digital Excellence.
@@ -33,7 +33,7 @@ export default function Hero() {
               <p className="mt-6 text-lg leading-8 text-neutral-300 md:text-xl">
                 Welcome to EvaDevStudio, where cutting-edge technology meets creative design. We specialize in mobile app development, web development, and stunning graphics design. Our portfolio, running on Firebase Studio AI + Next.js, is a testament to our commitment to speed, performance, and modern aesthetics.
               </p>
-              <div className="mt-10 flex items-center justify-center gap-x-6">
+              <div className="mt-10 flex items-center justify-start gap-x-6">
                 <Button asChild size="lg">
                   <Link href="#projects">Our Work</Link>
                 </Button>
