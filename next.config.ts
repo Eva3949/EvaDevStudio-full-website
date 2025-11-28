@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "https",
+        hostname: "evadevstudio.com",
+        port: '',
+        pathname: "/img/**",
+      },
+      {
         protocol: 'https',
         hostname: 'placehold.co',
         port: '',
