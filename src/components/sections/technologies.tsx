@@ -8,12 +8,14 @@ const technologies = [
     { name: "Dart" },
     { name: "TypeScript" },
     { name: "HTML/CSS/JS" },
-    { name: "Adobe Suite" },
-    { name: "Figma" },
-    { name: "Genkit AI" },
+    { name: "SQL" },
+    { name: "CPANEL" },
+    { name: "AI" },
+    { name: "Mongodb" },
     { name: "React" },
     { name: "Node.js" },
     { name: "Tailwind CSS" },
+    { name: "PHP" },
 ];
 
 export default function Technologies() {

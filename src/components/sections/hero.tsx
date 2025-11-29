@@ -31,7 +31,7 @@ export default function Hero() {
                 <span className="text-primary">Built on Innovation.</span>
               </h1>
               <p className="mt-6 text-lg leading-8 text-neutral-300 md:text-xl">
-                Welcome to EvaDevStudio, where cutting-edge technology meets creative design. We specialize in mobile app development, web development, and stunning graphics design. Our portfolio, running on Firebase Studio AI + Next.js, is a testament to our commitment to speed, performance, and modern aesthetics.
+                Welcome to EvaDevStudio, where cutting-edge technology meets creative design. We specialize in mobile app development, web development, and stunning graphics design. Our portfolio is a testament to our commitment to speed, performance, and modern aesthetics.
               </p>
               <div className="mt-10 flex items-center justify-start gap-x-6">
                 <Button asChild size="lg">
