@@ -32,7 +32,7 @@ const projects = [
     description: 'Stunning, responsive portfolio websites for creatives and professionals to showcase their work and attract clients.',
     features: 'Dynamic galleries, contact forms, SEO optimization.',
     impact: 'Enhanced online presence and client acquisition.',
-    tags: ['Web Design', 'Next.js', 'Figma'],
+    tags: ['Wordpress', 'portfolio', 'UI/UX DESIGN','FRONT-END DEVELOPMENT'],
     link: '#',
   },
 ];

@@ -58,6 +58,9 @@ export default function Contact() {
                   <Input id="email" name="email" type="email" placeholder="Your Email" required />
                 </div>
                 <div className="space-y-2">
+                  <Input id="phone" name="phone" type="tel" placeholder="Your Phone (Optional)" />
+                </div>
+                <div className="space-y-2">
                   <Textarea id="message" name="message" placeholder="Your Message" rows={6} required />
                 </div>
                 <SubmitButton />
