@@ -56,6 +56,7 @@ ${message}
       chat_id: chatId,
       text: text,
     }),
+    cache: 'no-store', // This is crucial to prevent Next.js from interfering with the request.
   }).then(response => {
     if (!response.ok) {
       response.json().then(err => {
