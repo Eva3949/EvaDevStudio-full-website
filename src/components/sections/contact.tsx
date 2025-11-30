@@ -17,14 +17,13 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import SectionHeader from './section-header';
 import { useToast } from '@/hooks/use-toast';
-import { submitContactForm } from '@/app/actions';
+import { sendMessage } from '@/app/actions';
 import { Loader2, Send } from 'lucide-react';
 import { Card, CardContent } from '../ui/card';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
-  subject: z.string().min(5, { message: 'Subject must be at least 5 characters.' }),
   message: z.string().min(10, { message: 'Message must be at least 10 characters.' }),
 });
 
@@ -36,14 +35,13 @@ export default function Contact() {
     defaultValues: {
       name: '',
       email: '',
-      subject: '',
       message: '',
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     startTransition(async () => {
-      const result = await submitContactForm(values);
+      const result = await sendMessage(values);
 
       if (result.success) {
         toast({
@@ -55,7 +53,7 @@ export default function Contact() {
         toast({
           variant: 'destructive',
           title: 'Something went wrong.',
-          description: result.error || 'Could not send your message. Please try again.',
+          description: result.message || 'Could not send your message. Please try again.',
         });
       }
     });
@@ -93,19 +91,6 @@ export default function Contact() {
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input placeholder="your.email@example.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Subject</FormLabel>
-                      <FormControl>
-                        <Input placeholder="What is this about?" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

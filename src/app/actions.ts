@@ -1,57 +1,67 @@
 'use server';
 
-import { z } from 'zod';
-import { db } from '@/lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { classifyContactForm } from '@/ai/flows/classify-contact-form';
-import { sendTelegramMessage } from './actions/send-telegram-message';
+import {z} from 'zod';
 
-const formSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  subject: z.string(),
-  message: z.string(),
+const schema = z.object({
+  name: z.string().min(2, {message: 'Name must be at least 2 characters.'}),
+  email: z.string().email({message: 'Please enter a valid email.'}),
+  message: z.string().min(10, {message: 'Message must be at least 10 characters.'}),
 });
 
-export async function submitContactForm(values: z.infer<typeof formSchema>) {
-  try {
-    const validatedData = formSchema.parse(values);
+export async function sendMessage(data: {name: string, email: string, message: string}) {
+  const validatedFields = schema.safeParse(data);
 
-    // This is the primary and most important task.
-    const docRef = await addDoc(collection(db, 'contacts'), {
-      ...validatedData,
-      createdAt: serverTimestamp(),
-      isServiceRelated: null, // Default value before classification
+  if (!validatedFields.success) {
+    return {
+      success: false,
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Invalid data provided.'
+    };
+  }
+  
+  const { name, email, message } = validatedFields.data;
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    console.error('Telegram bot token or chat ID is not configured.');
+    return { success: false, message: 'Server configuration error. Could not send message.' };
+  }
+
+  const telegramMessage = `
+New message from your portfolio:
+-------------------------------
+Name: ${name}
+Email: ${email}
+Message: ${message}
+-------------------------------
+  `;
+
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: telegramMessage,
+        parse_mode: 'Markdown',
+      }),
+      cache: 'no-store',
     });
 
-    // --- Secondary, "fire-and-forget" tasks ---
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Failed to send Telegram message:', errorData);
+      return { success: false, message: 'Failed to send message via Telegram.' };
+    }
 
-    // 1. AI Classification (don't block for this)
-    classifyContactForm({ message: validatedData.message })
-      .then(classification => {
-        // This is an update, not a new write.
-        // We don't need to 'await' this either. It can happen in the background.
-        db.collection('contacts').doc(docRef.id).update({
-          isServiceRelated: classification.isServiceRelated,
-        });
-      })
-      .catch(error => {
-        // Log the classification error to the server console for debugging.
-        // This does not affect the user.
-        console.error('AI classification failed:', error);
-      });
-
-    // 2. Telegram Notification (don't block for this)
-    // This will now correctly run in the background.
-    Promise.resolve(sendTelegramMessage(validatedData));
-
-    // If we get here, it means saving to Firestore was successful.
-    // This is the most important success criteria.
-    return { success: true };
-    
+    return { success: true, message: 'Message sent successfully!' };
   } catch (error) {
-    console.error('Error submitting form:', error);
-    // This will catch validation errors or Firestore write errors.
-    return { success: false, error: 'An unexpected error occurred. Please try again.' };
+    console.error('Error sending message to Telegram:', error);
+    return { success: false, message: 'Failed to send message. Please try again later.' };
   }
 }
