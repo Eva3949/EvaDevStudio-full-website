@@ -56,16 +56,19 @@ ${message}
       chat_id: chatId,
       text: text,
     }),
-    cache: 'no-store', // This is crucial to prevent Next.js from interfering with the request.
+    cache: 'no-store', // This is crucial.
   }).then(response => {
     if (!response.ok) {
+      // Asynchronously read the error body and log it.
       response.json().then(err => {
         console.error('Failed to send message to Telegram:', response.status, err);
       }).catch(() => {
+        // Handle cases where the error response is not valid JSON.
         console.error('Failed to send message to Telegram and could not parse error response.');
       });
     }
   }).catch(error => {
+    // Handle network errors or other issues with the fetch call itself.
     console.error('Error sending message to Telegram:', error);
   });
 }
