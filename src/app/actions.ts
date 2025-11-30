@@ -42,7 +42,8 @@ export async function submitContactForm(values: z.infer<typeof formSchema>) {
       });
 
     // 2. Telegram Notification (don't block for this)
-    sendTelegramMessage(validatedData);
+    // This will now correctly run in the background.
+    Promise.resolve(sendTelegramMessage(validatedData));
 
     // If we get here, it means saving to Firestore was successful.
     // This is the most important success criteria.
