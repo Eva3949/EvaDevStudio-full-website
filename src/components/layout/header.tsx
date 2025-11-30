@@ -12,7 +12,6 @@ const navLinks = [
   { href: '#services', label: 'Services' },
   { href: '#projects', label: 'Projects' },
   { href: '#about', label: 'About' },
-  { href: '#contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -52,11 +51,6 @@ export default function Header() {
         </nav>
         
         <div className="flex items-center gap-4">
-          <div className="hidden md:block">
-              <Button asChild>
-                  <Link href="#contact">Get a Quote</Link>
-              </Button>
-          </div>
           <ThemeToggle />
 
           <div className="md:hidden">
@@ -84,9 +78,6 @@ export default function Header() {
                       </Link>
                     ))}
                   </nav>
-                  <Button asChild className="mt-4">
-                      <Link href="#contact">Get a Quote</Link>
-                  </Button>
                 </div>
               </SheetContent>
             </Sheet>
