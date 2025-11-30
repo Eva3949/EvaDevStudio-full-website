@@ -17,55 +17,6 @@ type FormState = {
   message: string;
 };
 
-async function sendToTelegram(
-  name: string,
-  email: string,
-  phone: string | undefined,
-  message: string
-) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-
-  if (!botToken || !chatId) {
-    console.error('Telegram bot token or chat ID is not configured.');
-    return; // Don't block form submission if Telegram is not configured
-  }
-
-  const text = `
-New Contact Form Submission:
----------------------------
-Name: ${name}
-Email: ${email}
-Phone: ${phone || 'Not provided'}
----------------------------
-Message:
-${message}
-  `;
-
-  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: text,
-        parse_mode: 'Markdown',
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Failed to send message to Telegram:', errorData);
-    }
-  } catch (error) {
-    console.error('Error sending message to Telegram:', error);
-  }
-}
-
 export async function submitContactForm(
   prevState: FormState,
   formData: FormData
@@ -96,18 +47,14 @@ export async function submitContactForm(
       };
     }
 
-    // Save to Firestore and send to Telegram concurrently
-    await Promise.all([
-        addDoc(collection(db, 'contacts'), {
-            name,
-            email,
-            phone,
-            message,
-            createdAt: serverTimestamp(),
-        }),
-        sendToTelegram(name, email, phone, message)
-    ]);
-
+    // Save to Firestore
+    await addDoc(collection(db, 'contacts'), {
+        name,
+        email,
+        phone,
+        message,
+        createdAt: serverTimestamp(),
+    });
 
     return {
       success: true,
