@@ -45,26 +45,28 @@ ${message}
 
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: text,
-      }),
+  // Use fetch without await and handle errors in .catch to avoid blocking
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: text,
+    }),
+  })
+    .then(async (response) => {
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({})); // Gracefully handle non-json responses
+            console.error('Failed to send message to Telegram:', response.status, errorData);
+        }
+    })
+    .catch((error) => {
+        console.error('Error sending message to Telegram:', error);
     });
-    
-    if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Failed to send message to Telegram:', response.status, errorData);
-    }
-  } catch (error) {
-    console.error('Error sending message to Telegram:', error);
-  }
 }
+
 
 export async function submitContactForm(
   prevState: FormState,
@@ -87,16 +89,19 @@ export async function submitContactForm(
   const { name, email, phone, message } = validatedFields.data;
 
   try {
-    const classification = await classifyContactForm({ message });
-
-    if (!classification.isServiceRelated) {
-      return {
-        success: false,
-        message: "Thank you for your message. It seems your inquiry is not related to our services. For general questions, please check our FAQ or contact us through other channels.",
-      };
+    // Perform AI classification but don't let it block submission if it fails.
+    try {
+      const classification = await classifyContactForm({ message });
+      if (!classification.isServiceRelated) {
+        // Return a soft-fail message if not service related, but still save it.
+        console.log("Contact form submission was not service-related.");
+      }
+    } catch (aiError) {
+      console.error("AI classification failed:", aiError);
+      // Don't block the user, just log the error and proceed.
     }
 
-    // Save to Firestore first. This is the critical path.
+    // This is the most critical part: save the data.
     await addDoc(collection(db, 'contacts'), {
         name,
         email,
@@ -105,19 +110,20 @@ export async function submitContactForm(
         createdAt: serverTimestamp(),
     });
 
-    // Then, send to Telegram. We don't await this so it doesn't block the response to the user.
-    // If it fails, it will log an error to the console without causing a user-facing error.
+    // Send Telegram notification in the background (fire-and-forget).
     sendToTelegram(name, email, phone, message);
 
+    // If we've reached here, the core task (saving to DB) was successful.
     return {
       success: true,
       message: 'Thank you for your message! We will get back to you shortly.',
     };
+
   } catch (error) {
-    console.error('Error submitting form:', error);
+    console.error('Error saving contact form to Firestore:', error);
     return {
       success: false,
-      message: 'An unexpected error occurred. Please try again later.',
+      message: 'An unexpected error occurred while saving your message. Please try again later.',
     };
   }
 }
