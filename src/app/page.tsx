@@ -6,6 +6,7 @@ import Technologies from '@/components/sections/technologies';
 import WorkProcess from '@/components/sections/work-process';
 import Founder from '@/components/sections/founder';
 import AnimatedSection from '@/components/animated-section';
+import Contact from '@/components/sections/contact';
 
 export default function Home() {
   return (
@@ -28,6 +29,9 @@ export default function Home() {
       </AnimatedSection>
       <AnimatedSection>
         <Founder />
+      </AnimatedSection>
+      <AnimatedSection>
+        <Contact />
       </AnimatedSection>
     </>
   );
