@@ -96,7 +96,7 @@ export async function submitContactForm(
       };
     }
 
-    // Send to Telegram and save to Firestore concurrently
+    // Save to Firestore and send to Telegram concurrently
     await Promise.all([
         addDoc(collection(db, 'contacts'), {
             name,
