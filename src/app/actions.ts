@@ -45,7 +45,8 @@ ${message}
 
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-  // Use fetch without await and handle errors in .catch to avoid blocking
+  // Use fetch and handle errors in .catch to avoid blocking the main thread.
+  // This is a "fire-and-forget" operation.
   fetch(url, {
     method: 'POST',
     headers: {
@@ -55,16 +56,17 @@ ${message}
       chat_id: chatId,
       text: text,
     }),
-  })
-    .then(async (response) => {
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({})); // Gracefully handle non-json responses
-            console.error('Failed to send message to Telegram:', response.status, errorData);
-        }
-    })
-    .catch((error) => {
-        console.error('Error sending message to Telegram:', error);
-    });
+  }).then(response => {
+    if (!response.ok) {
+      response.json().then(err => {
+        console.error('Failed to send message to Telegram:', response.status, err);
+      }).catch(() => {
+        console.error('Failed to send message to Telegram and could not parse error response.');
+      });
+    }
+  }).catch(error => {
+    console.error('Error sending message to Telegram:', error);
+  });
 }
 
 
