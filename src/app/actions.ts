@@ -30,14 +30,15 @@ export async function sendMessage(data: {name: string, email: string, phone: str
   }
 
   const telegramMessage = `
-New message from your portfolio:
--------------------------------
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Message: ${message}
--------------------------------
-  `;
+✨ *New Contact Form Submission* ✨
+
+👤 *Name:* ${name}
+📧 *Email:* ${email}
+📞 *Phone:* ${phone}
+
+📝 *Message:*
+${message}
+  `.trim();
 
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
