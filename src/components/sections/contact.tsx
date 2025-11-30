@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from '@/app/actions';
-import { Loader2 } from 'lucide-react';
+import { Loader2, User, Mail, Phone, MessageSquare } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 function SubmitButton() {
@@ -51,17 +51,21 @@ export default function Contact() {
           <Card>
             <CardContent className="p-8">
               <form ref={formRef} action={formAction} className="space-y-6">
-                <div className="space-y-2">
-                  <Input id="name" name="name" placeholder="Your Name" required />
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input id="name" name="name" placeholder="Your Name" required className="pl-10" />
                 </div>
-                <div className="space-y-2">
-                  <Input id="email" name="email" type="email" placeholder="Your Email" required />
+                <div className="relative">
+                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input id="email" name="email" type="email" placeholder="Your Email" required className="pl-10" />
                 </div>
-                <div className="space-y-2">
-                  <Input id="phone" name="phone" type="tel" placeholder="Your Phone (Optional)" />
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input id="phone" name="phone" type="tel" placeholder="Your Phone (Optional)" className="pl-10" />
                 </div>
-                <div className="space-y-2">
-                  <Textarea id="message" name="message" placeholder="Your Message" rows={6} required />
+                <div className="relative">
+                  <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+                  <Textarea id="message" name="message" placeholder="Your Message" rows={6} required className="pl-10 pt-2" />
                 </div>
                 <SubmitButton />
               </form>
