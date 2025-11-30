@@ -18,49 +18,53 @@ type FormState = {
 };
 
 async function sendToTelegram(
-    name: string,
-    email: string,
-    phone: string | undefined,
-    message: string
-  ) {
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
-  
-    if (!botToken || !chatId) {
-      console.error('Telegram Bot Token or Chat ID is not configured.');
-      // Silently fail in production if not configured
-      return;
-    }
-  
-    const text = `
-  New Contact Form Submission:
-  
-  Name: ${name}
-  Email: ${email}
-  Phone: ${phone || 'Not provided'}
-  
-  Message:
-  ${message}
-  `;
-  
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-  
-    try {
-      await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: text,
-        }),
-      });
-    } catch (error) {
-      console.error('Failed to send message to Telegram:', error);
-      // Do not throw error to user, just log it.
-    }
+  name: string,
+  email: string,
+  phone: string | undefined,
+  message: string
+) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    console.error('Telegram Bot Token or Chat ID is not configured.');
+    // Silently fail if not configured, as this is a notification and not critical path.
+    return;
   }
+
+  const text = `
+New Contact Form Submission:
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+
+Message:
+${message}
+`;
+
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: text,
+      }),
+    });
+    
+    if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Failed to send message to Telegram:', response.status, errorData);
+    }
+  } catch (error) {
+    console.error('Error sending message to Telegram:', error);
+  }
+}
 
 export async function submitContactForm(
   prevState: FormState,
@@ -92,17 +96,18 @@ export async function submitContactForm(
       };
     }
 
-    // Save to Firestore and send to Telegram concurrently
-    await Promise.all([
-        addDoc(collection(db, 'contacts'), {
-            name,
-            email,
-            phone,
-            message,
-            createdAt: serverTimestamp(),
-        }),
-        sendToTelegram(name, email, phone, message)
-    ]);
+    // Save to Firestore first. This is the critical path.
+    await addDoc(collection(db, 'contacts'), {
+        name,
+        email,
+        phone,
+        message,
+        createdAt: serverTimestamp(),
+    });
+
+    // Then, send to Telegram. We don't await this so it doesn't block the response to the user.
+    // If it fails, it will log an error to the console without causing a user-facing error.
+    sendToTelegram(name, email, phone, message);
 
     return {
       success: true,
